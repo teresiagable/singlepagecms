@@ -5,13 +5,13 @@ import CMSMain from "./components/CMSMain"
 
 function App() {
 	return (
-		<div className="App">
+		<React.Fragment className="App">
 			<header className="App-header">
 				<nav className="navbar navbar-dark bg-primary">
 					<img
 						src={logo}
 						alt="Flying pig logo"
-						Style="width:60px;"
+						style={{width:"60px"}}
 						className="navbar-brand"
 					/>
 					<h1>Gable CMS</h1>
@@ -21,7 +21,7 @@ function App() {
             <CMSMain fileName = {carData}/>
             </body>
 			<footer></footer>
-		</div>
+		</React.Fragment>
 	);
 }
 
