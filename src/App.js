@@ -1,11 +1,10 @@
 import React from "react";
 import logo from "./assets/img/logo.jpg";
-import carData from "./assets/data/cars.json";
 import CMSMain from "./components/CMSMain"
 
 function App() {
 	return (
-		<React.Fragment className="App">
+		<React.Fragment >
 			<header className="App-header">
 				<nav className="navbar navbar-dark bg-primary">
 					<img
@@ -18,7 +17,7 @@ function App() {
 				</nav>
 			</header>
 			<body>
-            <CMSMain fileName = {carData}/>
+            <CMSMain />
             </body>
 			<footer></footer>
 		</React.Fragment>

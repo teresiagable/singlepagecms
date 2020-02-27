@@ -1,0 +1,40 @@
+{
+    "carList": 
+    [
+        {
+            "id": "5632359b-f41d-4999-99ff-a70e4e8b2c29",
+            "brand": "Saab",
+            "model": "900 Turbo",
+            "year": "1992",
+            "Info": "The Saab 900 is a mid-sized automobile which was produced by Saab from 1978 until 1998 in two generations. The first generation from 1978 to 1994 is known as the classic and the generation from 1994 to 1998 is known as the new generation"
+        },
+        {
+            "id": "2b30f76b-bc76-40d0-b35f-9174a5f65c19",
+            "brand": "Volvo",
+            "model": "745 GL",
+            "year": "1988",
+            "Info": "Introduced in early 1984 (in the U.S. and Australia for the 1985 model year), the 740 arrived nearly two years after the luxurious 760. It was the lower-end version of the original 760, intended to be a mid-size car that offered more style, performance, and luxury than the 200 series. The '4' in the middle of the Volvo model name had once signified a four-cylinder engine, but by the time of the introduction of the 740 it simply meant less luxurious equipment as four- and six-cylinder engines were fitted across both ranges. The 740 was available as a four-door sedan (sometimes referred to as the 744) and a five-door station wagon (also known as the 745). The station wagon premiered simultaneously at the 1985 Toronto and Chicago auto shows in early February 1985. The wagon was aimed squarely at the North American markets and only went on sale in Europe several months later, in the fall of 1985."
+        },
+        {
+            "id": "99ba8e5d-3501-48d2-9d78-e014b5a440a7",
+            "brand": "BMW",
+            "model": "525i",
+            "year": "2001",
+            "Info": "The BMW 5 Series is an executive car manufactured by BMW since 1972. It is the successor to the New Class Sedans and is currently in its seventh generation.Initially, the 5 Series was only available in a sedan body style. The wagon/estate body style (called Touring) was added in 1991 and the 5-door fastback (called Gran Turismo) was produced from 2009 to 2017.The first generation of 5 Series was powered by naturally aspirated four-cylinder and six-cylinder petrol engines. Following generations have been powered by four-cylinder, six-cylinder, V8 and V10 engines that are either naturally aspirated or turbocharged. Since 1982, diesel engines have been included in the 5 Series range."
+        },
+        {
+            "id": "b0696bc8-11ff-450b-a5ea-b560947ee268",
+            "brand": "Nissan",
+            "model": "Leaf",
+            "year": "2012",
+            "Info": "The Nissan Leaf (Japanese: 日産・リーフ, Nissan Rīfu), stylised by manufacturer Nissan as LEAF, is a compact five-door hatchback battery electric vehicle, introduced in Japan and the United States in December 2010, and now in its second generation. Its range on a full charge is 243 km (151 miles). Among other awards and recognition, the Leaf has won the 2010 Green Car Vision Award, the 2011 European Car of the Year, the 2011 World Car of the Year, and the 2011–2012 Car of the Year Japan."
+        },
+        {
+            "id": "a340b1e4-b792-4e77-96e0-c6d1fda6747f",
+            "brand": "Fiat",
+            "model": "Uno",
+            "year": "1985",
+            "Info": "The Fiat Uno is a front-engine, front-drive, four-passenger supermini manufactured and marketed Fiat. Launched in 1983, the Uno was produced over a single generation (with an intermediate facelift, 1989) in three and five-door hatchback body styles until 1995 in Europe — and until 2013, in Brazil. Designed by Giorgetto Giugiaro of Italdesign, The Uno strongly recalled the high-roof, up-right packaging of Giugiaro's 1978 Lancia Megagamma concept, in a smaller configuration."
+        }
+    ]
+}

@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 class CMSDetails extends Component {
 	render() {
-		const theCar = this.props.theCar;
+		const item = this.props.theCar;
 		return (
 			<div className="border border-secondary">
 				
-                {theCar.brand}
-                {theCar.year}
+                {item.brand}
+                {item.year}
 			</div>
 		);
 	}

@@ -2,74 +2,46 @@ import React, { Component } from "react";
 import CMSDetails from "./CMSDetails";
 import CMSList from "./CMSList";
 
+
 class CMSMain extends Component {
 	state = {
-		item: ""
-	};
+        items: "",
+        itemsFetched: false,
+        selectedItemId:-1
+    }
+	
+    componentDidMount()
+    {
+        console.log("nu är jag här");
+          fetch('public/data/cars.json')//Request part
+          .then(response => console.log(response))
+          .then(response => response.json())             //Response part
+          .then(response => this.setState({ items: response.carList, itemsFetched: true }))
+          //    .then(response => console.log(response))
+    }
 
-	handleListClick(props) {
-        console.log(props);
-        this.setState({item:props});
-	}
+	openDetails(id) {
+        console.log(id);
+        this.setState({selectedItemId:id});
+    }
+    
 	render() {
-		const carList = [
-			{
-				brand: "Saab",
-				model: "900 Turbo",
-				year: "1992"
-			},
-			{
-				brand: "Volvo",
-				model: "745 GL",
-				year: "1988"
-			},
-			{
-				brand: "BMW",
-				model: "525i",
-				year: "2001"
-			},
-			{
-				brand: "Nissan",
-				model: "Leaf",
-				year: "2012"
-			},
-			{
-				brand: "Fiat",
-				model: "Uno",
-				year: "1985"
-			}
-		];
-		console.log(this.state.item);
+        const {items, itemsFetched, selectedItemId, } = this.state;
+
+        if(!itemsFetched){
+            return "hej"
+        }
+
+		console.log(this.state);
 		return (
 			<div className="d-flex flex-row border border-light justify-content-between">
 				<div>
-					<table className="table table-hover">
-						<thead>
-							<tr className="table-info">
-								<th scope="col">Brand</th>
-								<th scope="col">Model</th>
-								<th scope="col">Year</th>
-							</tr>
-						</thead>
-						<tbody>
-							{carList.map((car, index) => {
-								return (
-									<tr
-										key={car.model + index}
-										onClick={() => this.handleListClick(car)}
-									>
-										<td>{car.brand}</td>
-										<td>{car.model}</td>
-										<td>{car.year}</td>
-									</tr>
-								);
-							})}
-						</tbody>
-					</table>
+                <CMSList itemList = {items} onItemClick = {this.openDetails}/>
 				</div>
-				<CMSDetails theCar = {this.state.item}></CMSDetails>
+				<CMSDetails item = {selectedItemId}/>
 			</div>
-		);
+        );
+        
 	}
 }
 
