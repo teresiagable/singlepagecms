@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function CMSList(props) {
-	const itemList = props.data;
+	const itemList = props.itemList;
 console.log(props);
     
 	return (
@@ -13,13 +13,13 @@ console.log(props);
 								<th scope="col">Model</th>
 								<th scope="col">Year</th>
 							</tr>
-						</thead>
+					    	</thead>
 						<tbody>
 							{itemList.map((item, index) => {
 								return (
 									<tr
 										key={item.id}
-										onClick={() => this.props.handleListClick(item)}
+										onClick={() => props.onItemClick(item.id)}
 									>
 										<td>{item.brand}</td>
 										<td>{item.model}</td>
