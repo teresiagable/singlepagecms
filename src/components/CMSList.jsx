@@ -5,7 +5,7 @@ export default function CMSList(props) {
 console.log(props);
     
 	return (
-		<div>
+		<div className="w-50">
 					<table className="table table-hover">
 						<thead>
 							<tr className="table-info">
