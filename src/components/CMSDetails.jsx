@@ -3,80 +3,109 @@ import React, { Component } from "react";
 class CMSDetails extends Component {
 	render() {
 		const car = this.props.item;
-		let details = "nothing selected";
+		let details = "Nothing selected";
+		let inEditMode = false;
 		if (car != null) {
-			console.log(car.brand);
+			if (car.id === "") inEditMode = true;
+
+			console.log("edit", inEditMode);
 			details = (
-				<form className="w-50">
-					<table className="table table-hover d-flex flex-row ">
-                    {/* <div class="form-group row"> */}
+				<form className="w-50 d-flex">
+					<table className="table table-hover border border-light  container">
+						{/* <div class="form-group row"> */}
 
 						<thead>
-							<tr className="table-info w-100">
-								<th scope="row">
-									{car.brand + " " + car.model + " " + car.year}
+							<tr className="table-info w-100 ">
+								<th className="justify-content-center text-dark">
+									{inEditMode
+										? "Enter car details:"
+										: car.brand +
+										  " " +
+										  car.model +
+										  " " +
+										  car.year}
 								</th>
 							</tr>
 						</thead>
-
+						<tbody>
 							<tr>
-								<label for="brand" class="col-sm-2 col-form-label">
-									Brand:
-								</label>
-								<div class="col-sm-10">
-									<input
-										type="text"
-										readonly=""
-										className="form-control-plaintext"
-										id="brand"
-										value={car.brand}
-									/>
-								</div>
+								<td className="row">
+									<label
+										for="brand"
+										className="col-sm-2 col-form-label"
+									>
+										Brand:
+									</label>
+									<div className="col-sm">
+										<input
+											type="text"
+											readOnly={inEditMode}
+											className="form-control"
+											id="brand"
+											value={car.brand}
+										/>
+									</div>
+								</td>
 							</tr>
 
 							<tr>
-								<label for="brand" className="col-sm-2 col-form-label">
-									Model:
-								</label>
-								<div class="col-sm-10">
-									<input
-										type="text"
-										readonly=""
-										className="form-control-plaintext"
-										id="model"
-										value={car.model}
-									/>
-								</div>
-								>
+								<td className="row">
+									<label
+										for="brand"
+										className="col-sm-2 col-form-label"
+									>
+										Model:
+									</label>
+									<div className="col">
+										<input
+											type="text"
+											readOnly={inEditMode}
+											className="form-control-plaintext"
+											id="model"
+											value={car.model}
+										/>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<label for="brand" class="col-sm-2 col-form-label">
-									Year:
-								</label>
-								<div class="col-sm-10">
-									<input
-										type="text"
-										readonly=""
-										className="form-control-plaintext"
-										id="year"
-										value={car.year}
-									/>
-								</div>
+								<td className="row">
+									<label
+										for="brand"
+										className="col-sm-2 col-form-label"
+									>
+										Year:
+									</label>
+									<div className="col">
+										<input
+											type="text"
+											readOnly={inEditMode}
+											className="form-control-plaintext"
+											id="year"
+											value={car.year}
+										/>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<label for="brand" class="col-sm-2 col-form-label">
-									Info:
-								</label>
-								<div class="col-sm-10">
-									<textarea
-										className="form-control"
-										rows="8"
-										id="info"
-										value={car.Info}
-									/>
-								</div>
+								<td className="row">
+									<label
+										for="brand"
+										className="col-sm-2 col-form-label"
+									>
+										Info:
+									</label>
+									<div className="col-sm-10">
+										<textarea
+											className="form-control"
+											rows="8"
+											readOnly={inEditMode}
+											id="info"
+											value={car.Info}
+										/>
+									</div>
+								</td>
 							</tr>
-						{/* </div> */}
+						</tbody>
 					</table>
 				</form>
 			);
