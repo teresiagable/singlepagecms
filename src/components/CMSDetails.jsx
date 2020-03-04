@@ -1,8 +1,31 @@
 import React, { Component } from "react";
 
 class CMSDetails extends Component {
+	state = { id: "", brand: "", model: "", year: "", Info: "" };
+
+	componentDidMount = () => {
+		const car = this.props.item;
+		if (car != null) {
+			this.setState = {
+				id: car.id,
+				brand: car.brand,
+				model: car.model,
+				year: car.year,
+				Info: car.Info
+			};
+		}
+	};
+
+	handleChange = event => {
+		const { name, value } = event.target;
+		this.setState({
+			[name]: value
+		});
+	};
+
 	render() {
 		const car = this.props.item;
+
 		let details = "Nothing selected";
 		let inEditMode = false;
 		if (car != null) {
@@ -39,10 +62,11 @@ class CMSDetails extends Component {
 									<div className="col-sm">
 										<input
 											type="text"
-											readOnly={inEditMode}
+											readOnly={!inEditMode}
 											className="form-control"
-											id="brand"
-											value={car.brand}
+											onChange={this.handleChange}
+											name="brand"
+											value={this.state.brand}
 										/>
 									</div>
 								</td>
@@ -59,10 +83,11 @@ class CMSDetails extends Component {
 									<div className="col">
 										<input
 											type="text"
-											readOnly={inEditMode}
-											className="form-control-plaintext"
-											id="model"
-											value={car.model}
+											readOnly={!inEditMode}
+											className="form-control"
+											onChange={this.handleChange}
+											name="model"
+											value={this.state.model}
 										/>
 									</div>
 								</td>
@@ -78,10 +103,11 @@ class CMSDetails extends Component {
 									<div className="col">
 										<input
 											type="text"
-											readOnly={inEditMode}
-											className="form-control-plaintext"
-											id="year"
-											value={car.year}
+											readOnly={!inEditMode}
+											className="form-control"
+											onChange={this.handleChange}
+											name="year"
+											value={this.state.year}
 										/>
 									</div>
 								</td>
@@ -89,7 +115,7 @@ class CMSDetails extends Component {
 							<tr>
 								<td className="row">
 									<label
-										for="brand"
+										Htmlfor="Info"
 										className="col-sm-2 col-form-label"
 									>
 										Info:
@@ -97,10 +123,11 @@ class CMSDetails extends Component {
 									<div className="col-sm-10">
 										<textarea
 											className="form-control"
+											onChange={this.handleChange}
 											rows="8"
-											readOnly={inEditMode}
-											id="info"
-											value={car.Info}
+											readOnly={!inEditMode}
+											name="Info"
+											value={this.state.Info}
 										/>
 									</div>
 								</td>
