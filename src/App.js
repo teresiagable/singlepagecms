@@ -5,7 +5,7 @@ import CMSMain from "./components/CMSMain"
 function App() {
 	return (
 		<React.Fragment >
-			<header className="App-header">
+            <header className="App-header">
 				<nav className="navbar navbar-dark bg-primary">
 					<img
 						src={logo}

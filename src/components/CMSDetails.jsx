@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 
 class CMSDetails extends Component {
-	state = { id: "", brand: "", model: "", year: "", Info: "" };
+	state = { id: "", brand: "", model: "", year: "", Info: "" , inEditMode:false};
 
 	componentDidMount = () => {
-		const car = this.props.item;
+        const car = this.props.item;
+        console.log("mount",car);
 		if (car != null) {
 			this.setState = {
 				id: car.id,
 				brand: car.brand,
 				model: car.model,
 				year: car.year,
-				Info: car.Info
+                Info: car.Info,
+                inEditMode:false
 			};
 		}
 	};
-
+com
 	handleChange = event => {
 		const { name, value } = event.target;
 		this.setState({
@@ -27,11 +29,10 @@ class CMSDetails extends Component {
 		const car = this.props.item;
 
 		let details = "Nothing selected";
-		let inEditMode = false;
 		if (car != null) {
-			if (car.id === "") inEditMode = true;
+			// if (car.id === "") inEditMode = true;
 
-			console.log("edit", inEditMode);
+			console.log("edit", this.state);
 			details = (
 				<form className="w-50 d-flex">
 					<table className="table table-hover border border-light  container">
@@ -40,21 +41,17 @@ class CMSDetails extends Component {
 						<thead>
 							<tr className="table-info w-100 ">
 								<th className="justify-content-center text-dark">
-									{inEditMode
+									{this.state.inEditMode
 										? "Enter car details:"
-										: car.brand +
-										  " " +
-										  car.model +
-										  " " +
-										  car.year}
+										: car.brand + " " + car.model + " " + car.year}
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td className="row">
+								<td className="row ">
 									<label
-										for="brand"
+										htmlFor="brand"
 										className="col-sm-2 col-form-label"
 									>
 										Brand:
@@ -62,7 +59,7 @@ class CMSDetails extends Component {
 									<div className="col-sm">
 										<input
 											type="text"
-											readOnly={!inEditMode}
+											readOnly={!car.inEditMode}
 											className="form-control"
 											onChange={this.handleChange}
 											name="brand"
@@ -75,15 +72,15 @@ class CMSDetails extends Component {
 							<tr>
 								<td className="row">
 									<label
-										for="brand"
+										htmlFor="model"
 										className="col-sm-2 col-form-label"
 									>
 										Model:
 									</label>
-									<div className="col">
+									<div className="col-sm">
 										<input
 											type="text"
-											readOnly={!inEditMode}
+											readOnly={!car.inEditMode}
 											className="form-control"
 											onChange={this.handleChange}
 											name="model"
@@ -95,15 +92,15 @@ class CMSDetails extends Component {
 							<tr>
 								<td className="row">
 									<label
-										for="brand"
+										htmlFor="year"
 										className="col-sm-2 col-form-label"
 									>
 										Year:
 									</label>
-									<div className="col">
+									<div className="col-sm  ">
 										<input
 											type="text"
-											readOnly={!inEditMode}
+											readOnly={!car.inEditMode}
 											className="form-control"
 											onChange={this.handleChange}
 											name="year"
@@ -115,21 +112,24 @@ class CMSDetails extends Component {
 							<tr>
 								<td className="row">
 									<label
-										Htmlfor="Info"
-										className="col-sm-2 col-form-label"
+										htmlFor="Info"
+										className="col-sm-2 col-form-label h-75"
 									>
 										Info:
 									</label>
-									<div className="col-sm-10">
-										<textarea
-											className="form-control"
-											onChange={this.handleChange}
-											rows="8"
-											readOnly={!inEditMode}
-											name="Info"
-											value={this.state.Info}
-										/>
-									</div>
+									<textarea
+										className="form-control"
+										onChange={this.handleChange}
+										rows="8"
+										readOnly={!this.state.inEditMode}
+										name="Info"
+										value={this.state.Info}
+									/>
+								</td>
+							</tr>
+							<tr>
+								<td onClick={()=>this.setState({inEditMode:true})}>
+									<i className="fas fa-edit bg-red"  />
 								</td>
 							</tr>
 						</tbody>

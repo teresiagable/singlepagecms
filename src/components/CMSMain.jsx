@@ -22,7 +22,7 @@ class CMSMain extends Component {
 		this.setState({ selectedItemId: id });
 	};
 
-	CreateNew = () => {
+	createNew = () => {
 		console.log("create new");
 		this.setState({ selectedItemId: "new" });
 	};
@@ -36,7 +36,7 @@ class CMSMain extends Component {
 			return <div> "vänta lite" </div>;
 		}
 
-		console.log("itemsFetched", itemsFetched);
+		//console.log("itemsFetched", itemsFetched);
 		console.log(selectedItemId);
 		let theCar =
 			selectedItemId === "new"
@@ -50,7 +50,9 @@ class CMSMain extends Component {
 				<CMSList
 					itemList={items}
 					onItemClick={this.openDetails}
-					onNewClick={this.CreateNew}
+                    onNewClick={this.createNew}
+                    onDeleteClick={this.delete}
+                    onEditClick = {this.edit}
 				/>
 				<CMSDetails item={theCar} />
 			</div>

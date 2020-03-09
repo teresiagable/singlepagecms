@@ -5,16 +5,18 @@ export default function CMSList(props) {
 	console.log(props);
 
 	return (
+        
 		<div className="w-50">
 			<table className="table table-hover">
 				<thead>
 					<tr className="table-info">
-						<th scope="col">Brand</th>
-						<th scope="col">Model</th>
-						<th scope="col">Year</th>
+						<th className="w-20">Brand</th>
+						<th className="w-20">Model</th>
+						<th className="w-20">Year</th>
+						<th className="w-10">Delete</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody> 
 					{itemList.map((item, index) => {
 						return (
 							<tr
@@ -24,8 +26,7 @@ export default function CMSList(props) {
 								<td>{item.brand}</td>
 								<td>{item.model}</td>
 								<td>{item.year}</td>
-								<td>X</td>
-								<td>Update</td>
+								<td onClick={() => props.onDeleteClick(item.id)}><i className="fas fa-trash-alt bg-red"></i></td>
 							</tr>
 						);
 					})}
