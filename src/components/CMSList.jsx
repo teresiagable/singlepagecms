@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CMSList(props) {
 	const itemList = props.itemList;
-	console.log(props);
+	//console.log(props);
 
 	return (
         

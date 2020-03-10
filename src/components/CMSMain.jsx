@@ -42,7 +42,7 @@ class CMSMain extends Component {
 			selectedItemId === "new"
 				? newCar
 				: items.find(x => x.id === selectedItemId);
-		console.log("thecar", theCar);
+		console.log("theSelectedcar", theCar);
 		//console.log("thecar0",theCar[0])
 
 		return (

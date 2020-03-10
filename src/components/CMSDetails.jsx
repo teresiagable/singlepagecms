@@ -1,49 +1,65 @@
 import React, { Component } from "react";
 
 class CMSDetails extends Component {
-	state = { id: "", brand: "", model: "", year: "", Info: "" , inEditMode:false};
-
-	componentDidMount = () => {
-        const car = this.props.item;
-        console.log("mount",car);
-		if (car != null) {
-			this.setState = {
-				id: car.id,
-				brand: car.brand,
-				model: car.model,
-				year: car.year,
-                Info: car.Info,
-                inEditMode:false
-			};
-		}
+    state = {
+		id: -1,
+		brand: "nisse",
+		model: "",
+		year: "nisse",
+		Info: "",
+		inEditMode: false
 	};
-com
+
+	componentWillReceiveProps(nextProps) {
+        console.log("ny prop",nextProps.item.brand,nextProps.item.model);
+        console.log("förra prop", this.props.item);
+        console.log("this.state.brand", this.state.brand);
+
+        if (this.props.item!= null) console.log("nu finns props.item",this.props.item.id)
+		//if (nextProps.item.id !== this.state.id) {
+            console.log("lägg in i state",nextProps.item.brand,nextProps.item.model )
+			this.setState = ({
+				id: nextProps.item.id,
+				brand: nextProps.item.brand,
+				model: nextProps.item.model,
+				year: nextProps.item.year       ,
+				Info: nextProps.item.Info,
+				inEditMode: false
+			});
+       // }
+        console.log("state",this.state.brand)  
+
+	}
 	handleChange = event => {
 		const { name, value } = event.target;
 		this.setState({
 			[name]: value
-		});
+        });
+        console.log("event")
 	};
 
 	render() {
-		const car = this.props.item;
+		const car = this.state.item;
+		console.log("render this stATE",  this.state);
 
 		let details = "Nothing selected";
-		if (car != null) {
-			// if (car.id === "") inEditMode = true;
+		if (this.props.item!=null) {
+			//if (this.state.id === "") inEditMode = true;
 
-			console.log("edit", this.state);
+			console.log("edit", car);
 			details = (
 				<form className="w-50 d-flex">
-					<table className="table table-hover border border-light  container">
+					<table className="table table-hover border border-light container">
 						{/* <div class="form-group row"> */}
 
 						<thead>
 							<tr className="table-info w-100 ">
 								<th className="justify-content-center text-dark">
 									{this.state.inEditMode
-										? "Enter car details:"
-										: car.brand + " " + car.model + " " + car.year}
+										? "Edit car details:"
+                                        : "car" 
+                                        // Car.brand + " " + car.model + " " + car.year
+                                    }
 								</th>
 							</tr>
 						</thead>
@@ -57,9 +73,10 @@ com
 										Brand:
 									</label>
 									<div className="col-sm">
-										<input
+                                    {this.state.brand}
+										<input  
 											type="text"
-											readOnly={!car.inEditMode}
+											readOnly={!this.state.inEditMode}
 											className="form-control"
 											onChange={this.handleChange}
 											name="brand"
@@ -80,7 +97,7 @@ com
 									<div className="col-sm">
 										<input
 											type="text"
-											readOnly={!car.inEditMode}
+											readOnly={!this.state.inEditMode}
 											className="form-control"
 											onChange={this.handleChange}
 											name="model"
@@ -97,10 +114,10 @@ com
 									>
 										Year:
 									</label>
-									<div className="col-sm  ">
+									<div className="col-sm">
 										<input
 											type="text"
-											readOnly={!car.inEditMode}
+											readOnly={!this.state.inEditMode}
 											className="form-control"
 											onChange={this.handleChange}
 											name="year"
@@ -128,8 +145,8 @@ com
 								</td>
 							</tr>
 							<tr>
-								<td onClick={()=>this.setState({inEditMode:true})}>
-									<i className="fas fa-edit bg-red"  />
+								<td onClick={() => this.setState({ inEditMode: true })}>
+									<i className="fas fa-edit bg-red" />
 								</td>
 							</tr>
 						</tbody>
