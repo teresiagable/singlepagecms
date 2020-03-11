@@ -44,7 +44,14 @@ class CMSMain extends Component {
 		console.log("create new");
 		this.setState({ selectedItem: "new" });
 	};
+	sort = column => {
+		const newItems = this.state.items.sort((a, b) => b[column] - a[column]);
 
+		console.log(newItems);
+		this.setState({
+			items: this.state.items.sort((a, b) => b[column] - a[column])
+		});
+	};
 	render() {
 		const { items, itemsFetched, selectedItem } = this.state;
 
@@ -62,9 +69,10 @@ class CMSMain extends Component {
 					onNewClick={this.createNew}
 					onDeleteClick={this.delete}
 					onEditClick={this.edit}
+					onSortColumn={this.sort}
 				/>
 
-				<CMSDetails item={selectedItem} brand={selectedItem.brand} />
+				<CMSDetails item={selectedItem} />
 			</div>
 		);
 	}
