@@ -1,49 +1,62 @@
 import React, { Component } from "react";
 
 class CMSDetails extends Component {
-    state = {
-		id: -1,
-		brand: "nisse",
-		model: "",
-		year: "nisse",
-		Info: "",
-		inEditMode: false
+	state = {
+		id: this.props.item.id,
+		brand: this.props.item.brand,
+		model: this.props.item.model,
+		year: this.props.item.year,
+		Info: this.props.item.Info
+		//     // ,
+		//     // inEditMode: false
+		// ]
 	};
 
-	componentWillReceiveProps(nextProps) {
-        console.log("ny prop",nextProps.item.brand,nextProps.item.model);
-        console.log("förra prop", this.props.item);
-        console.log("this.state.brand", this.state.brand);
+	//state = this.initialState;
 
-        if (this.props.item!= null) console.log("nu finns props.item",this.props.item.id)
+	componentWillReceiveProps = nextProps => {
+		console.log("ny prop", nextProps.item.brand, nextProps.item.model);
+		console.log("ny och gammal brand", nextProps.brand, this.props.brand);
+		console.log("förra prop", this.props.item);
+		console.log("this.state", this.state);
+
+		if (this.props.item != null)
+			console.log("nu finns props.item", this.props.item.id);
 		//if (nextProps.item.id !== this.state.id) {
-            console.log("lägg in i state",nextProps.item.brand,nextProps.item.model )
-			this.setState = ({
-				id: nextProps.item.id,
-				brand: nextProps.item.brand,
-				model: nextProps.item.model,
-				year: nextProps.item.year       ,
-				Info: nextProps.item.Info,
-				inEditMode: false
-			});
-       // }
-        console.log("state",this.state.brand)  
+		console.log(
+			"lägg in i state",
+			nextProps.item.brand,
+			nextProps.item.model
+		);
 
-	}
+		this.setState({		
+            id:nextProps.item.id,
+			brand: nextProps.item.brand,
+			model: nextProps.item.model,
+            year: nextProps.item.year,
+            Info: nextProps.item.Info
+		});
+
+		console.log("state", this.state);
+	};
+
 	handleChange = event => {
 		const { name, value } = event.target;
-		this.setState({
-			[name]: value
-        });
-        console.log("event")
+		// this.setState({
+		// 	[name]: value
+		// });
+		console.log("event");
+	};
+	handleEditClick = event => {
+		this.setState({ inEditMode: true });
 	};
 
 	render() {
-		const car = this.state.item;
-		console.log("render this stATE",  this.state);
+		const car = this.state.car;
+		console.log("render this stATE", this.state);
 
 		let details = "Nothing selected";
-		if (this.props.item!=null) {
+		if (this.props.item != null) {
 			//if (this.state.id === "") inEditMode = true;
 
 			console.log("edit", car);
@@ -57,9 +70,9 @@ class CMSDetails extends Component {
 								<th className="justify-content-center text-dark">
 									{this.state.inEditMode
 										? "Edit car details:"
-                                        : "car" 
-                                        // Car.brand + " " + car.model + " " + car.year
-                                    }
+										: "car"
+									// Car.brand + " " + car.model + " " + car.year
+									}
 								</th>
 							</tr>
 						</thead>
@@ -73,8 +86,7 @@ class CMSDetails extends Component {
 										Brand:
 									</label>
 									<div className="col-sm">
-                                    {this.state.brand}
-										<input  
+										<input
 											type="text"
 											readOnly={!this.state.inEditMode}
 											className="form-control"
@@ -145,7 +157,7 @@ class CMSDetails extends Component {
 								</td>
 							</tr>
 							<tr>
-								<td onClick={() => this.setState({ inEditMode: true })}>
+								<td onClick={() => this.handleEditClick}>
 									<i className="fas fa-edit bg-red" />
 								</td>
 							</tr>
