@@ -45,21 +45,23 @@ class CMSMain extends Component {
 		this.setState({ selectedItem: "new" });
 	};
 	sort = column => {
-		const newItems = this.state.items.sort((a, b) => b[column] - a[column]);
-
-		console.log(newItems);
 		this.setState({
-			items: this.state.items.sort((a, b) => b[column] - a[column])
+			items: [...this.state.items].sort(function(x, y) {
+				if (x[column] < y[column]) return -1;
+
+				if (x[column] > y[column]) return 1;
+
+				return 0;
+			})
 		});
 	};
+
 	render() {
 		const { items, itemsFetched, selectedItem } = this.state;
 
 		if (!itemsFetched) {
 			return <div> "vänta lite" </div>;
 		}
-
-		//console.log("itemsFetched", itemsFetched);
 
 		return (
 			<div className="d-flex flex-row border border-light w-100">

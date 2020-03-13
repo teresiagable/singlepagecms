@@ -5,9 +5,9 @@ export default function CMSList(props) {
 	const sortCSS = "bg-secondary";
 	//console.log(props);
 
-	const sortColumn = column => {
-		console.log(column);
-		props.onSortColumn(column);
+	const sortColumn = e => {
+		console.log(e);
+		//props.onSortColumn(column);
 	};
 
 	return (
@@ -16,8 +16,8 @@ export default function CMSList(props) {
 				<thead>
 					<tr className="table-info">
 						<th
-							className="bg-secondary"
-							onClick={() => sortColumn("brand")}
+							className="w-20"
+							onClick={() => props.onSortColumn("brand")}
 						>
 							Brand
 						</th>
@@ -27,8 +27,18 @@ export default function CMSList(props) {
 						>
 							Model
 						</th>
-						<th className="w-20">Year</th>
-						<th className="w-10">Delete</th>
+						<th
+							className="w-20"
+							onClick={() => props.onSortColumn("year")}
+						>
+							Year
+						</th>
+						<th
+							className="w-10"
+							onClick={() => props.onSortColumn("model")}
+						>
+							Delete
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,7 +52,7 @@ export default function CMSList(props) {
 								<td>{item.model}</td>
 								<td>{item.year}</td>
 								<td
-									onClick={() => props.onDeleteClick(item.id)}
+								// onClick={() => props.onDeleteClick(item.id)}
 								>
 									<i className="fas fa-trash-alt bg-red"></i>
 								</td>
