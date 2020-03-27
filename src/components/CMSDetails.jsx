@@ -10,25 +10,40 @@ class CMSDetails extends Component {
 		inEditMode: false
 	};
 
+	blankIfUndefined(value) {
+		if (value == null) return "";
+		else return value;
+	}
+
+	trueIfUndefined(value) {
+		if (value == null) return true;
+		else return false;
+	}
+
 	componentWillReceiveProps = nextProps => {
-		console.log("ny prop", nextProps.item.brand, nextProps.item.model);
-		console.log("ny och gammal brand", nextProps.brand, this.props.brand);
+		console.log("ny prop item", nextProps.item);
+		console.log(
+			"ny och gammal brand",
+			nextProps.item.brand,
+			this.props.item.brand
+		);
 		console.log("förra prop", this.props.item);
 		console.log("this.state", this.state);
 
 		if (!this.state.inEditMode) {
 			console.log(
 				"lägg in i state",
-				nextProps.item.brand,
+				this.blankIfUndefined(nextProps.item.brand),
 				nextProps.item.model
 			);
 
 			this.setState({
-				id: nextProps.item.id,
-				brand: nextProps.item.brand,
-				model: nextProps.item.model,
-				year: nextProps.item.year,
-				Info: nextProps.item.Info
+				id: this.blankIfUndefined(nextProps.item.id),
+				brand: this.blankIfUndefined(nextProps.item.brand),
+				model: this.blankIfUndefined(nextProps.item.model),
+				year: this.blankIfUndefined(nextProps.item.year),
+				Info: this.blankIfUndefined(nextProps.item.Info),
+				inEditMode: this.trueIfUndefined(nextProps.item.id)
 			});
 		}
 	};
@@ -44,32 +59,36 @@ class CMSDetails extends Component {
 		console.log("editevent", this.state.inEditMode);
 
 		this.setState({ inEditMode: true });
-    };
-    
-    handleCancelClick = event => {
+	};
+
+	handleCancelClick = event => {
 		console.log("editevent", this.state.inEditMode);
 
-		this.setState({ 		
-            id: this.props.item.id,
-            brand: this.props.item.brand,
-            model: this.props.item.model,
-            year: this.props.item.year,
-            Info: this.props.item.Info,
-            inEditMode: false });
+		this.setState({
+			id: this.props.item.id,
+			brand: this.props.item.brand,
+			model: this.props.item.model,
+			year: this.props.item.year,
+			Info: this.props.item.Info,
+			inEditMode: false
+		});
+	};
+
+	handleSubmit = event => {
+		event.preventDefault();
+		console.log(this.state);
+		this.props.onSubmit(this.state);
 	};
 
 	render() {
-        const car = this.state.car;
-        const editCSS=(this.state.inEditMode?"bg-secondary":"bg-info");
-		console.log("render this stATE", this.state);
+		const car = this.state.car;
+		const editCSS = this.state.inEditMode ? "bg-secondary" : "bg-info";
 
 		let details = "Nothing selected";
 		if (this.props.item != null) {
-			//if (this.state.id === "") inEditMode = true;
-
 			console.log("edit", this.state.inEditMode);
 			details = (
-				<form className="w-50 d-flex">
+				<form onSubmit={this.handleSubmit} className="w-50 d-flex">
 					<table className="table border border-light container">
 						{/* <div class="form-group row"> */}
 
@@ -77,10 +96,12 @@ class CMSDetails extends Component {
 							<tr className={editCSS}>
 								<th className="justify-content-center text-dark">
 									{this.state.inEditMode
-										? "Edit car details:"
-										: 
-									 this.state.brand + " " + this.state.model + " " + this.state.year
-									}
+										? "Enter car details:"
+										: this.state.brand +
+										  " " +
+										  this.state.model +
+										  " " +
+										  this.state.year}
 								</th>
 							</tr>
 						</thead>
@@ -164,16 +185,35 @@ class CMSDetails extends Component {
 									/>
 								</td>
 							</tr>
-                            </tbody>
+						</tbody>
 
-                            <tfoot className="w-100">
+						<tfoot className="w-100">
 							<tr className="w-100">
-								<td className="d-flex justify-content-between" >
-									<div onClick={this.handleEditClick}><i className="fas fa-edit bg-red"  /> Edit</div>
-								
-									<div onClick={this.handleCancelClick}><i className="fas fa-undo-alt bg-red"  /> Undo</div>
+								<td className="d-flex justify-content-between">
+									<input
+										type={
+											this.state.inEditMode
+												? "submit"
+												: "hidden"
+										}
+										className="btn btn-secondary"
+										value="Save"
+									></input>
+
+									{!this.state.inEditMode ? (
+										<div onClick={this.handleEditClick}>
+											<i className="fas fa-edit bg-red" />
+											Edit
+										</div>
+									) : (
+										<div onClick={this.handleCancelClick}>
+											<i className="fas fa-undo-alt bg-red" />
+											Undo
+										</div>
+									)}
 								</td>
-							</tr></tfoot>
+							</tr>
+						</tfoot>
 					</table>
 				</form>
 			);

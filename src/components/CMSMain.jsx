@@ -30,8 +30,8 @@ class CMSMain extends Component {
 				}
 			]
 		};
-		console.log(id);
-		console.log(selectedId);
+		console.log("openDetails id", id);
+		//console.log(selectedId);
 		let theCar =
 			selectedId === "new"
 				? newCar
@@ -42,7 +42,8 @@ class CMSMain extends Component {
 
 	createNew = () => {
 		console.log("create new");
-		this.setState({ selectedItem: "new" });
+		this.openDetails("new");
+		//this.setState({ selectedItem: "new" });
 	};
 	sort = column => {
 		this.setState({
@@ -59,6 +60,20 @@ class CMSMain extends Component {
 	render() {
 		const { items, itemsFetched, selectedItem } = this.state;
 
+		function saveChanges(values) {
+			console.log("save new car");
+			console.log(values);
+
+			fetch("./cars.json", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ values })
+			});
+		}
+
 		if (!itemsFetched) {
 			return <div> "vänta lite" </div>;
 		}
@@ -74,7 +89,7 @@ class CMSMain extends Component {
 					onSortColumn={this.sort}
 				/>
 
-				<CMSDetails item={selectedItem} />
+				<CMSDetails item={selectedItem} onSubmit={saveChanges} />
 			</div>
 		);
 	}
