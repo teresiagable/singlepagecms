@@ -7,7 +7,7 @@ class CMSDetails extends Component {
 		model: this.props.item.model,
 		year: this.props.item.year,
 		Info: this.props.item.Info,
-		inEditMode: false
+		inEditMode: false,
 	};
 
 	blankIfUndefined(value) {
@@ -20,7 +20,7 @@ class CMSDetails extends Component {
 		else return false;
 	}
 
-	componentWillReceiveProps = nextProps => {
+	componentWillReceiveProps = (nextProps) => {
 		console.log("ny prop item", nextProps.item);
 		console.log(
 			"ny och gammal brand",
@@ -43,25 +43,25 @@ class CMSDetails extends Component {
 				model: this.blankIfUndefined(nextProps.item.model),
 				year: this.blankIfUndefined(nextProps.item.year),
 				Info: this.blankIfUndefined(nextProps.item.Info),
-				inEditMode: this.trueIfUndefined(nextProps.item.id)
+				inEditMode: this.trueIfUndefined(nextProps.item.id),
 			});
 		}
 	};
 
-	handleChange = event => {
+	handleChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({
-			[name]: value
+			[name]: value,
 		});
 		console.log("event");
 	};
-	handleEditClick = event => {
+	handleEditClick = (event) => {
 		console.log("editevent", this.state.inEditMode);
 
 		this.setState({ inEditMode: true });
 	};
 
-	handleCancelClick = event => {
+	handleCancelClick = (event) => {
 		console.log("editevent", this.state.inEditMode);
 
 		this.setState({
@@ -70,14 +70,18 @@ class CMSDetails extends Component {
 			model: this.props.item.model,
 			year: this.props.item.year,
 			Info: this.props.item.Info,
-			inEditMode: false
+			inEditMode: false,
 		});
 	};
 
-	handleSubmit = event => {
+	handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(this.state);
-		this.props.onSubmit(this.state);
+		console.log("old", this.state);
+		let newCar = this.state;
+		delete newCar.inEditMode;
+		console.log("newCar", this.state);
+
+		this.props.onSubmit(newCar);
 	};
 
 	render() {

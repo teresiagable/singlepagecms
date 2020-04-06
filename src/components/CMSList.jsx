@@ -3,9 +3,8 @@ import React from "react";
 export default function CMSList(props) {
 	const itemList = props.itemList;
 	const sortCSS = "bg-secondary";
-	//console.log(props);
 
-	const sortColumn = e => {
+	const sortColumn = (e) => {
 		console.log(e);
 		//props.onSortColumn(column);
 	};
@@ -52,7 +51,7 @@ export default function CMSList(props) {
 								<td>{item.model}</td>
 								<td>{item.year}</td>
 								<td
-								// onClick={() => props.onDeleteClick(item.id)}
+									onClick={() => props.onDeleteClick(item.id)}
 								>
 									<i className="fas fa-trash-alt bg-red"></i>
 								</td>
